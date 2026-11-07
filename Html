@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Conscious Clothing Toolkit</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#f5f3ef;color:#1a1a18;min-height:100vh;padding:2rem 1rem;}
+.wrap{max-width:620px;margin:0 auto;}
+.brand{text-align:center;margin-bottom:2.5rem;}
+.brand-name{font-family:'DM Serif Display',serif;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#5a7a5a;margin-bottom:4px;}
+h1{font-family:'DM Serif Display',serif;font-size:32px;font-weight:400;color:#1a1a18;line-height:1.2;margin-bottom:8px;}
+.subtitle{font-size:15px;color:#666;line-height:1.6;}
+.card{background:#fff;border-radius:16px;padding:1.75rem;margin-bottom:1rem;border:1px solid #e8e4de;}
+.intro-features{display:flex;flex-direction:column;gap:10px;margin:1.5rem 0;}
+.feat-row{display:flex;align-items:center;gap:14px;padding:12px 16px;background:#f8f6f2;border-radius:10px;}
+.feat-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+.feat-text{font-size:14px;color:#555;}
+.btn{display:inline-block;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.btn-primary{background:#3d6b3d;color:#fff;}
+.btn-primary:hover{background:#2d5a2d;}
+.btn-outline{background:#fff;color:#3d6b3d;border:1.5px solid #3d6b3d;}
+.btn-outline:hover{background:#f0f7f0;}
+.btn:disabled{opacity:0.4;cursor:not-allowed;}
+.center{text-align:center;}
+.prog-wrap{margin-bottom:1.5rem;}
+.prog-bg{height:5px;background:#e8e4de;border-radius:5px;margin-bottom:6px;}
+.prog-fill{height:5px;background:#3d6b3d;border-radius:5px;transition:width 0.4s ease;}
+.prog-lbl{font-size:12px;color:#999;display:flex;justify-content:space-between;}
+.topic-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#5a7a5a;background:#eef4ee;padding:4px 10px;border-radius:6px;margin-bottom:12px;}
+.q-text{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:#1a1a18;line-height:1.45;margin-bottom:1.25rem;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid #e8e4de;border-radius:10px;cursor:pointer;background:#fff;transition:all 0.15s;}
+.opt:hover{border-color:#3d6b3d;background:#f8fbf8;}
+.opt.correct{border-color:#3d6b3d;background:#eef6ee;}
+.opt.wrong{border-color:#c0392b;background:#fdf0ee;}
+.opt-letter{width:26px;height:26px;border-radius:50%;border:1.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#888;flex-shrink:0;}
+.opt.correct .opt-letter{background:#3d6b3d;border-color:#3d6b3d;color:#fff;}
+.opt.wrong .opt-letter{background:#c0392b;border-color:#c0392b;color:#fff;}
+.opt-text{font-size:14px;color:#1a1a18;line-height:1.4;}
+.feedback{margin-top:14px;padding:12px 16px;border-radius:0;font-size:13px;line-height:1.6;display:none;border-left:3px solid;}
+.feedback.correct-fb{background:#eef6ee;color:#2d5a2d;border-color:#3d6b3d;}
+.feedback.wrong-fb{background:#fdf0ee;color:#8b2e22;border-color:#c0392b;}
+.badge-pop{display:none;align-items:center;gap:12px;padding:12px 16px;background:#fffbf0;border:1px solid #f0d98c;border-radius:10px;margin-top:10px;}
+.badge-icon{width:36px;height:36px;border-radius:50%;background:#f0c040;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.badge-name{font-size:13px;font-weight:500;color:#7a5c00;}
+.badge-sub{font-size:12px;color:#a07a00;}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;}
+.badge-tally{font-size:13px;color:#888;display:flex;align-items:center;gap:6px;}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+.score-box{background:#f8f6f2;border-radius:10px;padding:14px;text-align:center;}
+.score-num{font-family:'DM Serif Display',serif;font-size:32px;color:#1a1a18;}
+.score-lbl{font-size:12px;color:#999;margin-top:2px;}
+.result-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:28px;}
+.result-title{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#1a1a18;margin-bottom:10px;text-align:center;}
+.result-desc{font-size:14px;color:#555;line-height:1.7;text-align:center;margin-bottom:1.25rem;}
+.tips-label{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#999;margin-bottom:10px;}
+.tip-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0ece6;font-size:13px;color:#444;line-height:1.5;}
+.tip-item:last-child{border-bottom:none;}
+.tip-arrow{color:#3d6b3d;flex-shrink:0;margin-top:2px;}
+.badges-section{margin-top:1.5rem;}
+.badges-label{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#999;text-align:center;margin-bottom:12px;}
+.badges-wrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.b-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:500;}
+.b-chip.earned{background:#fffbf0;color:#7a5c00;border:1px solid #f0d98c;}
+.b-chip.locked{background:#f5f3ef;color:#bbb;border:1px solid #e8e4de;}
+.action-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="brand">
+  <div class="brand-name">Fashion Health</div>
+  <h1>Conscious Clothing Toolkit</h1>
+  <p class="subtitle">Test your knowledge on fast fashion, fabric materials, and clothing care.</p>
+</div>
+
+<div id="screen-intro">
+  <div class="card">
+    <div class="intro-features">
+      <div class="feat-row">
+        <div class="feat-icon" style="background:#eef6ee;">🏅</div>
+        <span class="feat-text">Earn a badge for every correct answer</span>
+      </div>
+      <div class="feat-row">
+        <div class="feat-icon" style="background:#eef4ff;">💡</div>
+        <span class="feat-text">Learn a key fact after every question</span>
+      </div>
+      <div class="feat-row">
+        <div class="feat-icon" style="background:#fff8ee;">📊</div>
+        <span class="feat-text">Get your personalised result and action tips at the end</span>
+      </div>
+    </div>
+    <div class="center">
+      <button class="btn btn-primary" onclick="startQuiz()">Start the quiz &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<div id="screen-quiz" class="hidden">
+  <div class="prog-wrap">
+    <div class="prog-bg"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="prog-lbl"><span id="prog-label">Question 1 of 12</span><span id="prog-score">Score: 0</span></div>
+  </div>
+  <div class="card" id="q-area"></div>
+  <div class="nav-row">
+    <div class="badge-tally">🏅 <span id="badge-count">0</span> badges earned</div>
+    <button class="btn btn-primary" id="btn-next" onclick="nextQ()" disabled>Next</button>
+  </div>
+</div>
+
+<div id="screen-result" class="hidden">
+  <div class="score-grid">
+    <div class="score-box"><div class="score-num" id="res-score">0</div><div class="score-lbl">Correct</div></div>
+    <div class="score-box"><div class="score-num" id="res-total">12</div><div class="score-lbl">Questions</div></div>
+    <div class="score-box"><div class="score-num" id="res-pct">0%</div><div class="score-lbl">Score</div></div>
+  </div>
+  <div class="card">
+    <div class="result-icon" id="result-icon"></div>
+    <p class="result-title" id="result-title"></p>
+    <p class="result-desc" id="result-desc"></p>
+    <div class="tips-label">Your next steps</div>
+    <div id="tip-list"></div>
+  </div>
+  <div class="card badges-section">
+    <div class="badges-label">Badges earned</div>
+    <div class="badges-wrap" id="badges-grid"></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-outline" onclick="restartQuiz()">Retake quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+const questions=[
+  {topic:"Fast fashion impact",text:"Approximately how much clothing ends up in landfills globally every second?",opts:["One garbage truck's worth","One shopping bag's worth","One suitcase's worth","One laundry basket's worth"],correct:0,badge:"Waste Watcher",feedback:"Correct! The equivalent of one full garbage truck of textiles is landfilled or burned every second. Fast fashion's overproduction is a leading driver of this waste crisis.",wrongFeedback:"The scale is staggering — the equivalent of one full garbage truck of textiles is landfilled or burned every second globally."},
+  {topic:"Fast fashion impact",text:"What percentage of global water pollution is attributed to textile dyeing and treatment?",opts:["5%","10%","20%","35%"],correct:2,badge:"Water Guardian",feedback:"That's right — textile dyeing is responsible for around 20% of global water pollution, making fashion one of the most water-polluting industries on the planet.",wrongFeedback:"Textile dyeing accounts for around 20% of global water pollution. The chemicals used in dyeing often enter waterways untreated in many regions."},
+  {topic:"Fast fashion impact",text:"How long does the average fast fashion garment get worn before being discarded?",opts:["5–7 years","2–3 years","7–10 wears","Less than 5 wears"],correct:2,badge:"Trend Tracker",feedback:"Studies show the average fast fashion item is worn only 7–10 times before being thrown away. Buying fewer, better-quality pieces dramatically reduces this waste.",wrongFeedback:"Research shows the average fast fashion garment is worn just 7–10 times. Choosing quality over quantity makes a measurable difference."},
+  {topic:"Fast fashion impact",text:"Which of these actions has the single greatest impact on reducing a garment's carbon footprint?",opts:["Buying organic cotton","Washing at lower temperatures","Keeping clothing longer","Choosing local brands"],correct:2,badge:"Carbon Cutter",feedback:"Extending a garment's life by just 9 months reduces its carbon, water, and waste footprint by around 20–30%. Longevity is the most powerful lever we have.",wrongFeedback:"Extending the life of clothing is the most impactful action — keeping a garment an extra 9 months can reduce its footprint by 20–30%."},
+  {topic:"Material knowledge",text:"Which fabric sheds the most plastic microfibres when washed?",opts:["Cotton","Polyester fleece","Linen","Wool"],correct:1,badge:"Microfibre Detective",feedback:"Correct! Polyester fleece releases hundreds of thousands of plastic microfibres per wash. These particles pass through water treatment systems and enter oceans and food chains.",wrongFeedback:"Polyester fleece is one of the worst offenders — it sheds hundreds of thousands of microfibres per wash. A microfibre filter bag can help reduce this."},
+  {topic:"Material knowledge",text:"Which of these fabrics is generally considered the most sustainable?",opts:["Conventional cotton","Virgin polyester","Recycled nylon (ECONYL)","Viscose/rayon"],correct:2,badge:"Fabric Scholar",feedback:"Recycled nylon like ECONYL is made from ocean plastic and fishing nets, dramatically reducing energy use and waste compared to virgin synthetics.",wrongFeedback:"Recycled nylon (ECONYL) is made from recovered ocean plastic and nets — a strong circular choice compared to virgin polyester or conventional cotton."},
+  {topic:"Material knowledge",text:"Conventional cotton production is known for heavy pesticide use. Approximately what share of the world's insecticides does it consume?",opts:["5%","10%","16%","25%"],correct:2,badge:"Eco Analyst",feedback:"Although cotton covers only 2.5% of farmland, it uses around 16% of the world's insecticides. Choosing organic or recycled alternatives makes a real difference.",wrongFeedback:"Conventional cotton uses roughly 16% of the world's insecticides despite covering only 2.5% of cropland — a disproportionate environmental impact."},
+  {topic:"Material knowledge",text:"What does the OEKO-TEX Standard 100 certification tell you about a fabric?",opts:["It's 100% organic","It's tested for harmful substances","It's made from recycled fibres","It biodegrades within 5 years"],correct:1,badge:"Label Literate",feedback:"OEKO-TEX Standard 100 certifies that every component of a garment has been tested for harmful chemicals — even threads, buttons, and linings. It's one of the most reliable consumer certifications.",wrongFeedback:"OEKO-TEX Standard 100 means the garment has been tested for harmful substances — a useful signal when shopping, though it doesn't address environmental production impacts."},
+  {topic:"Care & longevity",text:"What is the most energy-intensive step in the lifecycle of a cotton t-shirt?",opts:["Manufacturing","Transportation","Consumer washing & drying","End-of-life disposal"],correct:2,badge:"Lifecycle Learner",feedback:"Great answer! Consumer laundering — especially tumble drying — accounts for the largest energy use in a cotton garment's lifecycle. Washing cold and air-drying makes a significant difference.",wrongFeedback:"Consumer washing and drying is the most energy-intensive phase. Washing on a cold cycle and air-drying are among the highest-impact care choices you can make."},
+  {topic:"Care & longevity",text:"How much longer does air-drying clothes last compared to tumble drying in terms of fabric wear?",opts:["No real difference","Fabrics last about 50% longer","Fabrics last up to 3x longer","Fabrics last twice as long"],correct:2,badge:"Care Champion",feedback:"Tumble drying degrades fibres through heat and friction — air-drying can extend a garment's life by up to three times, saving money and reducing waste.",wrongFeedback:"Air-drying can help clothes last up to three times longer by avoiding the heat and mechanical friction of a tumble dryer."},
+  {topic:"Care & longevity",text:"Which of these laundry habits is most effective at preserving colour and fabric quality?",opts:["Washing at 60°C to kill bacteria","Washing inside out in cold water","Adding fabric softener every wash","Washing with a small amount of bleach"],correct:1,badge:"Fabric Protector",feedback:"Washing clothes inside out in cold water protects surface fibres and colours, reduces energy use, and prevents pilling — a simple habit with meaningful impact.",wrongFeedback:"Turning clothes inside out and washing in cold water is one of the best ways to preserve colour and quality while reducing energy consumption."},
+  {topic:"Care & longevity",text:"What is 'cost-per-wear' and why does it matter for sustainable shopping?",opts:["A tax on fast fashion purchases","The total cost divided by number of times worn","A brand's sustainability rating system","The cost of repairing a garment"],correct:1,badge:"Smart Shopper",feedback:"Cost-per-wear = purchase price ÷ number of wears. A £150 coat worn 200 times costs £0.75 per wear — far less than a £30 top worn 5 times at £6 per wear. It reframes value beautifully.",wrongFeedback:"Cost-per-wear is price divided by number of wears. It helps justify investing in quality — a more expensive item worn often is almost always the more sustainable and economical choice."}
+];
+
+const allBadges=questions.map(q=>q.badge);
+let current=0,score=0,answered=false,earnedBadges=[];
+
+function startQuiz(){
+  document.getElementById('screen-intro').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+  renderQ();
+}
+
+function renderQ(){
+  const q=questions[current];
+  const pct=Math.round((current/questions.length)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-label').textContent='Question '+(current+1)+' of '+questions.length;
+  document.getElementById('prog-score').textContent='Score: '+score;
+  document.getElementById('btn-next').disabled=true;
+  document.getElementById('btn-next').textContent=current<questions.length-1?'Next':'See results';
+  answered=false;
+  const letters=['A','B','C','D'];
+  let html='<div class="topic-tag">'+q.topic+'</div>';
+  html+='<p class="q-text">'+q.text+'</p>';
+  html+='<div class="options">';
+  q.opts.forEach((opt,i)=>{
+    html+='<div class="opt" id="opt-'+i+'" onclick="selectOpt('+i+')" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')selectOpt('+i+')">';
+    html+='<div class="opt-letter">'+letters[i]+'</div>';
+    html+='<span class="opt-text">'+opt+'</span></div>';
+  });
+  html+='</div>';
+  html+='<div class="feedback correct-fb" id="fb-correct">✓ '+q.feedback+'</div>';
+  html+='<div class="feedback wrong-fb" id="fb-wrong">✗ '+q.wrongFeedback+'</div>';
+  html+='<div class="badge-pop" id="badge-pop"><div class="badge-icon">🏅</div><div><div class="badge-name">Badge earned: '+q.badge+'</div><div class="badge-sub">You got it right!</div></div></div>';
+  document.getElementById('q-area').innerHTML=html;
+}
+
+function selectOpt(idx){
+  if(answered)return;
+  answered=true;
+  const q=questions[current];
+  document.querySelectorAll('.opt').forEach((o,i)=>{
+    o.onclick=null;o.onkeydown=null;
+    if(i===q.correct)o.classList.add('correct');
+    else if(i===idx&&idx!==q.correct)o.classList.add('wrong');
+  });
+  if(idx===q.correct){
+    score++;earnedBadges.push(q.badge);
+    document.getElementById('fb-correct').style.display='block';
+    document.getElementById('badge-pop').style.display='flex';
+    document.getElementById('badge-count').textContent=earnedBadges.length;
+    document.getElementById('prog-score').textContent='Score: '+score;
+  } else {
+    document.getElementById('fb-wrong').style.display='block';
+  }
+  document.getElementById('btn-next').disabled=false;
+}
+
+function nextQ(){
+  current++;
+  if(current>=questions.length){showResult();return;}
+  renderQ();
+}
+
+function showResult(){
+  document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('screen-result').classList.remove('hidden');
+  const pct=Math.round((score/questions.length)*100);
+  document.getElementById('res-score').textContent=score;
+  document.getElementById('res-total').textContent=questions.length;
+  document.getElementById('res-pct').textContent=pct+'%';
+  let icon,iconBg,title,desc,tips;
+  if(pct>=80){
+    icon='🌿';iconBg='#eef6ee';
+    title='Conscious clothing champion';
+    desc='You have an excellent grasp of sustainable fashion. Your choices are already making a difference — keep leading by example and sharing what you know.';
+    tips=['Share your knowledge — recommend secondhand platforms to friends and family','Explore clothing repair and upcycling to extend garment life even further','Look into certifications like GOTS, Fair Trade, and B Corp when shopping'];
+  } else if(pct>=50){
+    icon='👕';iconBg='#eef4ff';
+    title='On the right track';
+    desc='You have a solid foundation in sustainable fashion. A few more areas to explore and you will be making truly informed choices with every purchase.';
+    tips=['Focus on fabric labels — look for OEKO-TEX, GOTS, or recycled content','Try the cost-per-wear calculation before your next clothing purchase','Wash clothes in cold water and air-dry to extend their life significantly'];
+  } else {
+    icon='🌱';iconBg='#fff8ee';
+    title='Starting your journey';
+    desc='Every sustainable advocate starts somewhere. The fact that you are here means you care — now let the knowledge guide your next shopping decision.';
+    tips=['Start simple: commit to not buying fast fashion for one month','Explore a local thrift or secondhand shop before buying new','Check out Good On You (goodonyou.eco) to research brand ethics'];
+  }
+  const ri=document.getElementById('result-icon');
+  ri.textContent=icon;ri.style.background=iconBg;ri.style.fontSize='28px';
+  document.getElementById('result-title').textContent=title;
+  document.getElementById('result-desc').textContent=desc;
+  document.getElementById('tip-list').innerHTML=tips.map(t=>'<div class="tip-item"><span class="tip-arrow">→</span><span>'+t+'</span></div>').join('');
+  document.getElementById('badges-grid').innerHTML=allBadges.map(b=>{
+    const e=earnedBadges.includes(b);
+    return '<div class="b-chip '+(e?'earned':'locked')+'">'+(e?'🏅':'🔒')+' '+b+'</div>';
+  }).join('');
+}
+
+function restartQuiz(){
+  current=0;score=0;answered=false;earnedBadges=[];
+  document.getElementById('badge-count').textContent='0';
+  document.getElementById('screen-result').classList.add('hidden');
+  document.getElementById('screen-intro').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
